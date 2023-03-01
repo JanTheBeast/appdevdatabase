@@ -8,10 +8,12 @@ export default function Person(props) {
   const [contentUpdate, setContentUpdate] = useState([])
 
   const x = props.project
+  
+  const site = "localhost:5000"
 
   useEffect(() => {
     Axios
-      .get(`https://generic-node-api.herokuapp.com/api/projects/${props.project.id}/actions`)
+      .get(`${site}/api/projects/${props.project.id}/actions`)
       .then(response => {
         console.log(response)
         setActionContent(response.data.map(action => action)
@@ -24,7 +26,7 @@ export default function Person(props) {
 
   const toggleActionCompleted = (state, id) => {
     Axios
-      .put(`https://generic-node-api.herokuapp.com/api/actions/${id}`, { completed: !state })
+      .put(`${site}/api/actions/${id}`, { completed: !state })
       .then(res => {
         console.log(res)
         setContentUpdate(res)

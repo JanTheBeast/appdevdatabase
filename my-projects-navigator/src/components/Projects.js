@@ -7,9 +7,11 @@ export default function Projects() {
   const [content, setContent] = useState([])
   const [contentUpdate, setContentUpdate] = useState([])
 
+  const site = "localhost:5000"
+
   useEffect(() => {
     Axios
-      .get("https://generic-node-api.herokuapp.com/api/projects")
+      .get(`${site}/api/projects`)
       .then(response => {
         console.log(response)
         setContent(response.data.map(project => project)
@@ -22,7 +24,7 @@ export default function Projects() {
 
   const toggleProjectCompleted = (state, id) => {
     Axios
-      .put(`https://generic-node-api.herokuapp.com/api/projects/${id}`, { completed: !state })
+      .put(`${site}/api/projects/${id}`, { completed: !state })
       .then(res => {
         console.log(res)
         setContentUpdate(res)
@@ -35,7 +37,7 @@ export default function Projects() {
 
   const toggleActionCompleted = (state, id) => {
     Axios
-      .put(`https://generic-node-api.herokuapp.com/api/projects/${id}`, { completed: !state })
+      .put(`${site}/api/projects/${id}`, { completed: !state })
       .then(res => {
         console.log(res)
         setContentUpdate(res)
