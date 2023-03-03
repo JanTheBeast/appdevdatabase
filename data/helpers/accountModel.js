@@ -16,9 +16,7 @@ function get(id) {
         .where("a.id", id)
         .first();
     } else {
-      return query.then(projects => {
-        return projects.map(project => mappers.projectToBody(project));
-      });
+      return query;
     }
 }
 

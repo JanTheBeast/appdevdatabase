@@ -17,9 +17,7 @@ function get(id) {
         .where("n.id", id)
         .first();
     } else {
-      return query.then(projects => {
-        return projects.map(project => mappers.projectToBody(project));
-      });
+      return query;
     }
 }
 
@@ -45,6 +43,5 @@ function remove(id) {
 function getLocationRange(minLat, minLong, maxLat, maxLong) {
     return db("notes")
     .whereBetween("latitude", [minLat, maxLat])
-    .andWhereBetween("longitude", [minLong, maxLong])
-    .then(actions => actions.map(action => mappers.actionToBody(action)));
+    .andWhereBetween("longitude", [minLong, maxLong]);
 }
