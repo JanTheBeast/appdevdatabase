@@ -1,6 +1,5 @@
 const express = require("express")
 
-const actionsDB = require("../data/helpers/actionModel")
 const notesDB = require("../data/helpers/noteModel")
 
 const router = express.Router()

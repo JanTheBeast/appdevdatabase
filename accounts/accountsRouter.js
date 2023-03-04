@@ -1,6 +1,5 @@
 const express = require("express")
 
-const actionsDB = require("../data/helpers/actionModel")
 const accountsDB = require("../data/helpers/accountModel")
 
 const router = express.Router()
@@ -56,15 +55,5 @@ router.delete("/:id", (req, res) => {
       res.status(500).json({ message: "something went wrong deleting your account", err })
     })
 })
-
-// router.get("/:id/actions", (req, res) => {
-//   accountsDB.getaccountActions(req.params.id)
-//     .then(actions => {
-//       res.status(200).json(actions)
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "something went wrong getting your account actions", err })
-//     })
-// })
 
 module.exports = router
