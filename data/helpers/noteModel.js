@@ -7,6 +7,7 @@ module.exports = {
   update,
   remove,
   getLocationRange,
+  getNoteComments,
 };
 
 function get(id) {
@@ -44,4 +45,9 @@ function getLocationRange(minLat, minLong, maxLat, maxLong) {
     return db("notes")
     .whereBetween("latitude", [minLat, maxLat])
     .andWhereBetween("longitude", [minLong, maxLong]);
+}
+
+function getNoteComments(noteId) {
+    return db("comments")
+        .where("note_id", noteId);
 }
