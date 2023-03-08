@@ -3,8 +3,10 @@ exports.up = function(knex) {
         accounts.increments();
 
         accounts.string("name", 128).notNullable();
-        accounts.string("password", 128).notNullable();
+        accounts.string("email", 128).notNullable();
+        accounts.integer("password").notNullable();
         accounts.unique(["name"]);
+        accounts.unique(["email"]);
     });
 };
 

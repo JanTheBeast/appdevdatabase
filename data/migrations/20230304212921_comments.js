@@ -11,6 +11,15 @@ exports.up = function(knex) {
             .onDelete("CASCADE")
             .onUpdate("CASCADE");
 
+        comments
+            .integer("user_id")
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("accounts")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE");
+
         comments.text("text").notNullable();
     });  
 };

@@ -6,6 +6,19 @@ exports.up = function(knex) {
         notes.text("message").defaultTo("");
         notes.float("longitude").notNullable();
         notes.float("latitude").notNullable();
+        notes.boolean("anonymous");
+        notes.datetime("time").notNullable();
+        
+        notes.integer("group");
+
+        notes
+            .integer("user_id")
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("accounts")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE");
     });
 };
 
