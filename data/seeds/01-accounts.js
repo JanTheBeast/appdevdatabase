@@ -3,7 +3,7 @@ exports.seed = function(knex) {
     {
       name: "Bob",
       email: "h@a",
-      password: "bobiscool",
+      password: 123,
     },
   ]);
 };
