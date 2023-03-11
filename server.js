@@ -10,7 +10,7 @@ const server = express();
 
 server.use(helmet());
 
-server.use("/api/notes", notesRouter);
+server.use("/api/drops", notesRouter);
 
 server.use("/api/accounts", accountsRouter);
 

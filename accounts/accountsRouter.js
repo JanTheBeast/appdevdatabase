@@ -36,6 +36,16 @@ router.get("/:id/", (req, res) => {
     })
 })
 
+router.get("/name/:name/", (req, res) => {
+  accountsDB.getByName(req.params.name)
+    .then(account => {
+      res.status(200).json(account)
+    })
+    .catch(err => {
+      res.status(500).json({ message: "something went wrong getting your account", err })
+    })
+})
+
 router.put("/:id", (req, res) => {
   accountsDB.update(req.params.id, req.body)
     .then(account => {

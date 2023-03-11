@@ -4,13 +4,17 @@ exports.up = function(knex) {
 
         notes.string("title", 128).notNullable();
         notes.text("message").defaultTo("");
+
         notes.float("longitude").notNullable();
         notes.float("latitude").notNullable();
-        notes.boolean("anonymous");
-        notes.datetime("time").notNullable();
-        
-        notes.integer("group");
 
+        notes.boolean("anonymous").defaultTo(false);
+        notes.datetime("time").notNullable();
+        notes.integer("group").notNullable();
+
+        notes.integer("reports").defaultTo(0);
+        notes.integer("upvotes").defaultTo(0);
+        
         notes
             .integer("user_id")
             .unsigned()

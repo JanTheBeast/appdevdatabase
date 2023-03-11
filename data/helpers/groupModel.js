@@ -6,6 +6,9 @@ module.exports = {
   insert,
   update,
   remove,
+  removeMember,
+  addMember,
+  getMembers,
 };
 
 function get(id) {
@@ -37,4 +40,26 @@ function remove(id) {
   return db("groups")
     .where("id", id)
     .del();
+}
+
+function removeMember(id, user_id) {
+    return db("groupAccountRelations")
+        .where("group_id", id)
+        .andWhere("user_id", user_id)
+        .del();
+}
+
+function addMember(group_id, user_id) {
+    return db("groupAccountRelations")
+        .insert({"user_id": user_id, "group_id": group_id})
+        .then(([id]) => get(id));
+}
+
+function getMembers(id) {
+  subquery = db("groupAccountRelations")
+            .select("user_id")
+            .where("group_id", id);
+
+  return db("accounts")
+    .whereIn("id", subquery);
 }

@@ -21,6 +21,7 @@ exports.up = function(knex) {
             .onUpdate("CASCADE");
 
         comments.text("text").notNullable();
+        comments.integer("reports").defaultTo(0);
     });  
 };
 

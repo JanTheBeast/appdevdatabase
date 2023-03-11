@@ -3,6 +3,7 @@ const mappers = require("./mappers");
 
 module.exports = {
   get,
+  getByName,
   insert,
   update,
   remove,
@@ -14,6 +15,18 @@ function get(id) {
     if (id) {
       return query
         .where("a.id", id)
+        .first();
+    } else {
+      return query;
+    }
+}
+
+function getByName(name) {
+    let query = db("accounts as a");
+
+    if (name) {
+      return query
+        .where("a.name", name)
         .first();
     } else {
       return query;

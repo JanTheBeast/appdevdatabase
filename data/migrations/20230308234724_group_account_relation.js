@@ -1,7 +1,5 @@
 exports.up = function(knex) {
     return knex.schema.createTable("groupAccountRelations", function(GARel) {
-        GARel.increments();
-
         GARel
             .integer("user_id")
             .unsigned()
@@ -19,6 +17,8 @@ exports.up = function(knex) {
             .inTable("groups")
             .onDelete("CASCADE")
             .onUpdate("CASCADE");
+
+        GARel.unique(['user_id', 'group_id']);
     });
 };
 
