@@ -6,8 +6,10 @@ exports.seed = function(knex) {
       latitude: 51.448004,
       longitude: 5.4844645,
       anonymous: true,
-      time: "2009-06-18T16:44:20+0000",
+      time: 1678827951,
       user_id: 1,
+    //   reports: 0,
+    //   upvotes: 0,
     },
   ]);
 };
