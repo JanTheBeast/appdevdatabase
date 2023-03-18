@@ -12,11 +12,8 @@ const server = express();
 server.use(helmet());
 
 server.use("/api/drops", notesRouter);
-
 server.use("/api/accounts", accountsRouter);
-
 server.use("/api/comments", commentsRouter);
-
 server.use("/api/groups", groupsRouter);
 
 server.get("/", (req, res) => {

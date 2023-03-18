@@ -2,11 +2,13 @@ const express = require("express")
 
 const commentsDB = require("../data/helpers/commentModel")
 
+const auth = require("../auth")
+
 const router = express.Router()
 
 router.use(express.json())
 
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
   commentsDB.get()
     .then(comments => {
       res.status(200).json(comments)
@@ -16,7 +18,7 @@ router.get("/", (req, res) => {
     })
 })
 
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
   commentsDB.insert(req.body)
     .then(comments => {
       res.status(200).json(comments)
@@ -26,7 +28,7 @@ router.post("/", (req, res) => {
     })
 })
 
-router.get("/:id/", (req, res) => {
+router.get("/:id/", auth, (req, res) => {
   commentsDB.get(req.params.id)
     .then(comment => {
       res.status(200).json(comment)
@@ -36,7 +38,7 @@ router.get("/:id/", (req, res) => {
     })
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", auth, (req, res) => {
   commentsDB.update(req.params.id, req.body)
     .then(comment => {
       res.status(200).json(comment)
@@ -46,7 +48,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
   commentsDB.remove(req.params.id, req.body)
     .then(comment => {
       res.status(200).json(comment)

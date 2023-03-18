@@ -2,11 +2,13 @@ const express = require("express")
 
 const accountsDB = require("../data/helpers/accountModel")
 
+const auth = require("../auth")
+
 const router = express.Router()
 
 router.use(express.json())
 
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
   accountsDB.get()
     .then(accounts => {
       res.status(200).json(accounts)
@@ -16,7 +18,7 @@ router.get("/", (req, res) => {
     })
 })
 
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
   accountsDB.insert(req.body)
     .then(accounts => {
       res.status(200).json(accounts)
@@ -26,7 +28,7 @@ router.post("/", (req, res) => {
     })
 })
 
-router.get("/:id/", (req, res) => {
+router.get("/:id/", auth, (req, res) => {
   accountsDB.get(req.params.id)
     .then(account => {
       res.status(200).json(account)
@@ -36,7 +38,7 @@ router.get("/:id/", (req, res) => {
     })
 })
 
-router.get("/name/:name/", (req, res) => {
+router.get("/name/:name/", auth, (req, res) => {
   accountsDB.getByName(req.params.name)
     .then(account => {
       res.status(200).json(account)
@@ -46,7 +48,7 @@ router.get("/name/:name/", (req, res) => {
     })
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", auth, (req, res) => {
   accountsDB.update(req.params.id, req.body)
     .then(account => {
       res.status(200).json(account)
@@ -56,7 +58,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
   accountsDB.remove(req.params.id, req.body)
     .then(account => {
       res.status(200).json(account)

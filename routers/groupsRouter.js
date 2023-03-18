@@ -2,11 +2,13 @@ const express = require("express")
 
 const groupsDB = require("../data/helpers/groupModel")
 
+const auth = require("../auth")
+
 const router = express.Router()
 
 router.use(express.json())
 
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
   groupsDB.get()
     .then(groups => {
       res.status(200).json(groups)
@@ -16,7 +18,7 @@ router.get("/", (req, res) => {
     })
 })
 
-router.post("/", (req, res) => {
+router.post("/", auth, (req, res) => {
   groupsDB.insert(req.body)
     .then(groups => {
       res.status(200).json(groups)
@@ -26,7 +28,7 @@ router.post("/", (req, res) => {
     })
 })
 
-router.get("/:id/", (req, res) => {
+router.get("/:id/", auth, (req, res) => {
   groupsDB.get(req.params.id)
     .then(group => {
       res.status(200).json(group)
@@ -36,7 +38,7 @@ router.get("/:id/", (req, res) => {
     })
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", auth, (req, res) => {
   groupsDB.update(req.params.id, req.body)
     .then(group => {
       res.status(200).json(group)
@@ -46,7 +48,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", auth, (req, res) => {
   groupsDB.remove(req.params.id, req.body)
       .then(comment => {
         res.status(200).json(comment)
@@ -56,7 +58,7 @@ router.delete("/:id", (req, res) => {
       })
 })
 
-router.get("/:id/members", (req, res) => {
+router.get("/:id/members", auth, (req, res) => {
     groupsDB.getMembers(req.params.id)
       .then(comment => {
         res.status(200).json(comment)
@@ -66,7 +68,7 @@ router.get("/:id/members", (req, res) => {
       })
 })
 
-router.delete("/:id/:user_id", (req, res) => {
+router.delete("/:id/:user_id", auth, (req, res) => {
     groupsDB.removeMember(req.params.id, req.params.user_id)
         .then(comment => {
             res.status(200).json(comment)
@@ -76,7 +78,7 @@ router.delete("/:id/:user_id", (req, res) => {
         })
 })
 
-router.post("/:id/:user_id", (req, res) => {
+router.post("/:id/:user_id", auth, (req, res) => {
     groupsDB.addMember(req.params.id, req.params.user_id)
         .then(comment => {
             res.status(200).json(comment)
