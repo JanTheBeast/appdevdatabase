@@ -1,10 +1,11 @@
 const express = require('express');
 const helmet = require('helmet');
+// const jwt = require('jsonwebtoken');
 
-const notesRouter = require("./notes/notesRouter");
-const accountsRouter = require("./accounts/accountsRouter");
-const commentsRouter = require("./comments/commentsRouter");
-const groupsRouter = require("./groups/groupsRouter");
+const notesRouter = require("./routers/notesRouter");
+const accountsRouter = require("./routers/accountsRouter");
+const commentsRouter = require("./routers/commentsRouter");
+const groupsRouter = require("./routers/groupsRouter");
 
 const server = express();
 
