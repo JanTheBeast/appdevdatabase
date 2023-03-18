@@ -51,11 +51,7 @@ router.post('/create', async (req, res) => {
             return res.status(500).json({ message: "something went wrong creating your account", err })
         }
 
-        return res.send({
-            success: true,
-            token: token,
-            message: 'Account create successfully'
-        })
+        return res.status(200).json({ token: token })
 
     } catch (err) {
         return res.status(500).json({ message: "something went wrong creating your account", err })
@@ -68,21 +64,17 @@ router.post('/login', async (req, res) => {
         if (!name || !password) {
             return res.status(500).json({ message: "Empty field found" })
         }
-        
+
         const users = await accountsDB.getByName(name).first();
         if (!users) {
             return res.status(500).json({ message: "Invalid name" })
         }
-        
+
         const compare_password = await bcryptjs.compare(password, users.password);
         if (compare_password) {
             const user_id = { user_id: users.id };
             const token = jwt.sign(user_id, "key");
-            return res.send({
-                success: true,
-                token,
-                message: 'Account login successfully'
-            })
+            return res.status(200).json({ token: token })
         } else {
             return res.status(500).json({ message: "Invalid name and password", err })
         }
