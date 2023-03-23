@@ -51,7 +51,8 @@ router.post('/create', async (req, res) => {
             return res.status(500).json({ message: "something went wrong creating your account", err })
         }
 
-        return res.status(200).json({ token })
+        const id = users.id
+        return res.status(200).json({ token, id })
 
     } catch (err) {
         return res.status(500).json({ message: "something went wrong creating your account", err })
@@ -74,7 +75,8 @@ router.post('/login', async (req, res) => {
         if (compare_password) {
             const user_id = { user_id: users.id };
             const token = jwt.sign(user_id, "key");
-            return res.status(200).json({ token })
+            const id = users.id
+            return res.status(200).json({ token, id })
         } else {
             return res.status(500).json({ message: "Invalid name and password", err })
         }

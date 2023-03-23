@@ -8,8 +8,6 @@ exports.seed = function(knex) {
       anonymous: true,
       time: 1678827951,
       user_id: 1,
-    //   reports: 0,
-    //   upvotes: 0,
     },
   ]);
 };
