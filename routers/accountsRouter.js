@@ -96,6 +96,16 @@ router.get("/:id/", auth, (req, res) => {
         })
 })
 
+router.get("/:id/groups", auth, (req, res) => {
+    accountsDB.getGroups(req.params.id)
+      .then(groups => {
+        res.status(200).json(groups)
+      })
+      .catch(err => {
+        res.status(500).json({ message: "something went wrong getting group members", err })
+      })
+})
+
 router.get("/name/:name/", auth, (req, res) => {
     accountsDB.getByName(req.params.name)
         .then(account => {

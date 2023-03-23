@@ -7,6 +7,7 @@ module.exports = {
   insert,
   update,
   remove,
+  getGroups,
 };
 
 function get(id) {
@@ -50,4 +51,13 @@ function remove(id) {
   return db("accounts")
     .where("id", id)
     .del();
+}
+
+function getGroups(id) {
+    subquery = db("groupAccountRelations")
+              .select("group_id")
+              .where("user_id", id);
+  
+    return db("groups")
+      .whereIn("id", subquery);
 }
