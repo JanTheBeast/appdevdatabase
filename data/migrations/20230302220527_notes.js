@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-    return knex.schema.createTable("notes", function(notes) {
+exports.up = function (knex) {
+    return knex.schema.createTable("notes", function (notes) {
         notes.increments();
 
         notes.string("title", 128).notNullable();
@@ -10,11 +10,19 @@ exports.up = function(knex) {
 
         notes.boolean("anonymous").defaultTo(false);
         notes.bigint("time").notNullable();
-        notes.integer("group").defaultTo(0);
 
         notes.integer("reports").defaultTo(0);
         notes.integer("upvotes").defaultTo(0);
-        
+
+        notes
+            .integer("group_id")
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("groups")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE");
+
         notes
             .integer("user_id")
             .unsigned()
@@ -26,6 +34,6 @@ exports.up = function(knex) {
     });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
     return knex.schema.dropTableIfExists("notes");
 };

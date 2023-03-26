@@ -68,6 +68,16 @@ router.get("/:id/members", auth, (req, res) => {
       })
 })
 
+router.get("/:id/notes", auth, (req, res) => {
+    groupsDB.getNotes(req.params.id)
+      .then(comment => {
+        res.status(200).json(comment)
+      })
+      .catch(err => {
+        res.status(500).json({ message: "something went wrong getting group notes", err })
+      })
+})
+
 router.delete("/:id/:user_id", auth, (req, res) => {
     groupsDB.removeMember(req.params.id, req.params.user_id)
         .then(comment => {
