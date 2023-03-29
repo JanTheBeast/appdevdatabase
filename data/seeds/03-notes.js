@@ -15,8 +15,8 @@ exports.seed = function(knex) {
     {
         title: "Expensive cookies",
         message: "Expensive cookies at subway!",
-        latitude: 51.448004,
-        longitude: 5.4844645,
+        latitude: 51.44798,
+        longitude: 5.48467,
         anonymous: true,
         time: 1678827951,
         group_id: 1,
