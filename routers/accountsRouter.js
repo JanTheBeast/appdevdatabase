@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const accountsDB = require("../data/helpers/accountModel")
+const groupDB = require("../data/helpers/groupModel")
 
 const auth = require("../auth")
 
@@ -43,6 +44,8 @@ router.post('/create', async (req, res) => {
         users = await accountsDB.insert({
             name: name, email: email, password: hash_password
         })
+
+        publicGroup = await groupDB.addMember(1, users.id);
 
         const user_id = { user_id: users };
         const token = jwt.sign(user_id, "key");
