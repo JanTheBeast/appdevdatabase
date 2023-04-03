@@ -31,6 +31,15 @@ exports.up = function (knex) {
             .inTable("accounts")
             .onDelete("CASCADE")
             .onUpdate("CASCADE");
+
+        notes
+            .string("username")
+            .unsigned()
+            .notNullable()
+            .references("name")
+            .inTable("accounts")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE");
     });
 };
 
