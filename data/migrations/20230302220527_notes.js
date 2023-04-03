@@ -34,7 +34,6 @@ exports.up = function (knex) {
 
         notes
             .string("username")
-            .unsigned()
             .notNullable()
             .references("name")
             .inTable("accounts")
