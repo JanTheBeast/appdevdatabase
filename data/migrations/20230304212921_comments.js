@@ -20,6 +20,14 @@ exports.up = function(knex) {
             .onDelete("CASCADE")
             .onUpdate("CASCADE");
 
+        comments
+            .string("username")
+            .notNullable()
+            .references("name")
+            .inTable("accounts")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE");
+
         comments.text("text").notNullable();
         comments.integer("reports").defaultTo(0);
     });  
