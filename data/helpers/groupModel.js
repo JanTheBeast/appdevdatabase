@@ -8,6 +8,7 @@ module.exports = {
     remove,
     removeMember,
     addMember,
+    addMemberByName,
     getMembers,
     getNotes,
     getNotesInRange,
@@ -52,6 +53,14 @@ function removeMember(id, user_id) {
 }
 
 function addMember(group_id, user_id) {
+    return db("groupAccountRelations")
+        .insert({ "user_id": user_id, "group_id": group_id })
+        .then(([id]) => get(id));
+}
+
+function addMemberByName(group_id, username) {
+    user_id = db("accounts").select("id").where("name", username).first();
+    
     return db("groupAccountRelations")
         .insert({ "user_id": user_id, "group_id": group_id })
         .then(([id]) => get(id));

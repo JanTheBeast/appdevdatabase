@@ -108,4 +108,14 @@ router.post("/:id/:user_id", auth, (req, res) => {
         })
 })
 
+router.post("/:id/name/:user_name", auth, (req, res) => {
+    groupsDB.addMemberByName(req.params.id, req.params.user_name)
+        .then(comment => {
+            res.status(200).json(comment)
+        })
+        .catch(err => {
+            res.status(500).json({ message: "something went wrong adding the group member", err })
+        })
+})
+
 module.exports = router
