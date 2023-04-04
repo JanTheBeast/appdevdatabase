@@ -68,6 +68,16 @@ router.get("/:id/members", auth, (req, res) => {
       })
 })
 
+router.get("/:id/notes/:minLat/:minLong/:maxLat/:maxLong", auth, (req, res) => {
+    groupsDB.getNotesInRange(req.params.id, req.params.minLat, req.params.minLong, req.params.maxLat, req.params.maxLong)
+      .then(comment => {
+        res.status(200).json(comment)
+      })
+      .catch(err => {
+        res.status(500).json({ message: "something went wrong getting group notes", err })
+      })
+})
+
 router.get("/:id/notes", auth, (req, res) => {
     groupsDB.getNotes(req.params.id)
       .then(comment => {

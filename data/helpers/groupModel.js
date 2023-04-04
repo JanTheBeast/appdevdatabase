@@ -10,6 +10,7 @@ module.exports = {
     addMember,
     getMembers,
     getNotes,
+    getNotesInRange,
 };
 
 function get(id) {
@@ -67,4 +68,11 @@ function getMembers(id) {
 
 function getNotes(id) {
     return db("notes").where("group_id", id);
+}
+
+function getNotesInRange(id, minLat, minLong, maxLat, maxLong) {
+    return db("notes")
+        .where("group_id", id)
+        .andWhereBetween("latitude", [minLat, maxLat])
+        .andWhereBetween("longitude", [minLong, maxLong]);
 }
