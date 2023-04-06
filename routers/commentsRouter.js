@@ -18,6 +18,17 @@ router.get("/", auth, (req, res) => {
     })
 })
 
+router.get('/reported', auth, (req, res) => {
+    commentsDB.getReportedComments()
+        .then(comments => {
+            console.log(comments);
+            res.status(200).json(comments);
+        })
+        .catch(err => {
+            res.status(500).json({ message: "something went wrong getting your reported notes", err })
+        })
+})
+
 router.post("/", auth, (req, res) => {
   commentsDB.insert(req.body)
     .then(comments => {

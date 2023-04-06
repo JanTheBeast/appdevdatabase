@@ -6,6 +6,7 @@ module.exports = {
   insert,
   update,
   remove,
+  getReportedComments,
 };
 
 function get(id) {
@@ -37,4 +38,8 @@ function get(id) {
     return db("comments")
       .where("id", id)
       .del();
+  }
+
+  function getReportedComments() {
+    return db("comments").where('reports', '>', 0);
   }
