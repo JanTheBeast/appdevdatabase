@@ -5,6 +5,7 @@ exports.up = function(knex) {
         accounts.string("name", 128).notNullable();
         accounts.string("email", 128).notNullable();
         accounts.integer("password").notNullable();
+        accounts.boolean("moderator").notNullable();
         accounts.unique(["name"]);
         accounts.unique(["email"]);
     });

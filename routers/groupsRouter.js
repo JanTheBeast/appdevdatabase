@@ -95,7 +95,10 @@ router.delete("/:id/:user_id", auth, (req, res) => {
         })
         .catch(err => {
             res.status(500).json({ message: "something went wrong removing the group member", err })
-        })
+        });
+    
+    groupsDB.removeEmptyGroups().then().catch();
+    
 })
 
 router.post("/:id/:user_id", auth, (req, res) => {

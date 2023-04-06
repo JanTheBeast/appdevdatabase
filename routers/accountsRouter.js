@@ -33,7 +33,7 @@ router.post("/", auth, (req, res) => {
 
 router.post('/create', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, moderator } = req.body;
         if (!name || !email || !password) {
             return res.status(500).json({ message: "Empty field found", err })
         }
@@ -42,7 +42,7 @@ router.post('/create', async (req, res) => {
         let users;
 
         users = await accountsDB.insert({
-            name: name, email: email, password: hash_password
+            name: name, email: email, moderator: moderator, password: hash_password
         })
 
         publicGroup = await groupDB.addMember(1, users.id);

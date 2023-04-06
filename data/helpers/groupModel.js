@@ -7,6 +7,7 @@ module.exports = {
     update,
     remove,
     removeMember,
+    removeEmptyGroups,
     addMember,
     addMemberByName,
     getMembers,
@@ -46,10 +47,18 @@ function remove(id) {
 }
 
 function removeMember(id, user_id) {
-    return db("groupAccountRelations")
+    result = db("groupAccountRelations")
         .where("group_id", id)
         .andWhere("user_id", user_id)
         .del();
+
+    return result;
+}
+
+function removeEmptyGroups() {
+    return db("groups")
+            .whereNotIn("id",
+                db("groupAccountRelations").select("group_id")).del();
 }
 
 function addMember(group_id, user_id) {
