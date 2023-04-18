@@ -1,3 +1,5 @@
+// This file takes the HTTP requests related to comments and decides on the correct functionality based on the URL
+
 const express = require("express")
 
 const commentsDB = require("../data/helpers/commentModel")
@@ -8,6 +10,7 @@ const router = express.Router()
 
 router.use(express.json())
 
+// Functionality for basic GET request
 router.get("/", auth, (req, res) => {
   commentsDB.get()
     .then(comments => {
@@ -18,6 +21,7 @@ router.get("/", auth, (req, res) => {
     })
 })
 
+// GET request, gets all reported comments
 router.get('/reported', auth, (req, res) => {
     commentsDB.getReportedComments()
         .then(comments => {
@@ -29,6 +33,7 @@ router.get('/reported', auth, (req, res) => {
         })
 })
 
+// POST request for creating new comments
 router.post("/", auth, (req, res) => {
   commentsDB.insert(req.body)
     .then(comments => {
@@ -39,6 +44,7 @@ router.post("/", auth, (req, res) => {
     })
 })
 
+// GET request, gets account with the input id
 router.get("/:id/", auth, (req, res) => {
   commentsDB.get(req.params.id)
     .then(comment => {
@@ -49,6 +55,7 @@ router.get("/:id/", auth, (req, res) => {
     })
 })
 
+// PUT request, update the account with the specified id with the body
 router.put("/:id", auth, (req, res) => {
   commentsDB.update(req.params.id, req.body)
     .then(comment => {
@@ -59,6 +66,7 @@ router.put("/:id", auth, (req, res) => {
     })
 })
 
+// DELETE request, deletes the account with the input id
 router.delete("/:id", auth, (req, res) => {
   commentsDB.remove(req.params.id, req.body)
     .then(comment => {

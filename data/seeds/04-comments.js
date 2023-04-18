@@ -1,4 +1,6 @@
 exports.seed = function(knex) {
+
+    // Insert some standard comments for testing
     return knex('comments').insert([
         {
           note_id: 1,
