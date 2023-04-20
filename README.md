@@ -65,3 +65,6 @@ The database contains 5 tables for various purposes:
 | id          | integer   | relation id   |
 | group_id    | integer   | group that the user is associated with  |
 | user_id     | integer   | user that belongs to the group |
+
+## 
+This project was forked from the Github repository https://github.com/MorbidMiyako/node-api-challenge, which was in turn forked from https://github.com/bloominstituteoftechnology/node-api-challenge
